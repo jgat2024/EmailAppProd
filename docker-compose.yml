@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  api:
+    build:
+      context: ./server
+    env_file:
+      - ./server/.env
+    ports:
+      - "4000:4000"
