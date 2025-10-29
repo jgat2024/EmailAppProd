@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1><%= title %></h1>
+      <section>
+        <article>
+          <header>
+            <strong>Signed in as:</strong> <%= user.email %> (<%= user.role %>)
+          </header>
+          <p>This lightweight dashboard is ready for custom analytics, user management, and webhook delivery logs.</p>
+          <p>Extend <code>src/views/admin.ejs</code> and related routes to render live data from the database.</p>
+        </article>
+      </section>
+      <section>
+        <article>
+          <h2>Next Steps</h2>
+          <ul>
+            <li>Expose API data via dedicated admin routes.</li>
+            <li>Secure the dashboard with HTTPS and SSO where required.</li>
+            <li>Integrate charts using your preferred front-end library.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

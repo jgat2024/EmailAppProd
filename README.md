@@ -59,6 +59,7 @@ EmailApp/
    - `JWT_SECRET`, `WEBHOOK_SIGNATURE_SECRET`, and `ENCRYPTION_KEY` should be high-entropy strings.
    - Provide either `SUPABASE_DB_URL` (preferred) or the discrete `SUPABASE_DB_HOST`, `SUPABASE_DB_USER`, `SUPABASE_DB_PASSWORD`, `SUPABASE_DB_NAME`, and `SUPABASE_DB_PORT` values from the Supabase dashboard.
    - Keep `SUPABASE_DB_SSL=true` unless you are tunnelling traffic through an internal network that does not require TLS.
+   - If your host lacks IPv6 egress (DigitalOcean App Platform, some firewalls), leave `DB_FORCE_IPV4=true` so Sequelize resolves Supabase to IPv4 automatically. Optionally set `SUPABASE_DB_HOST_IPV4` to the `A` record returned from `dig +short db.<project>.supabase.co` for deterministic routing.
 
 3. (Optional) configure OAuth client secrets for providers you intend to support. These values are persisted in the `email_accounts` table.
 
@@ -129,6 +130,7 @@ docker compose exec api npm run supabase:setup
    - Set the build path to `server/` with the default Node.js builder.
    - Configure environment variables via the App Platform dashboard (use the Supabase keys from `.env.example`).
    - Supply Supabase as the backing database by setting `SUPABASE_DB_URL` (or the discrete host/user/password variables).
+   - Ensure `DB_FORCE_IPV4` remains enabled (default) or provide `SUPABASE_DB_HOST_IPV4` so the platform connects over IPv4-only networks.
    - Enable automatic HTTPS and scale worker counts as needed.
 
 Each deployment automatically synchronizes Supabase tables on boot; optionally run `npm run supabase:setup` during release workflows for immediate schema creation.
